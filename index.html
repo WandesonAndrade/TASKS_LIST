@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/TASK_LIST/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/1395b45b7b.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Lista de tarefas</title>
+  </head>
+  <body>
+    <div class="task-title"><h1>Lista de tarefas</h1></div>
+    <!-- CONTEINER DE DIALOG-->
+    <dialog class="dialog">
+      <div class="dialog-container">
+        <div class="dialog-title">
+          <h3>Adicionar tarefa</h3>
+        </div>
+        <div class="dialog-input">
+          <input type="text" placeholder="Digite o nome da tarefa" />
+          <textarea
+            name=""
+            id=""
+            placeholder="Digite a descrição da tarefa"
+          ></textarea>
+        </div>
+        <div class="dialog-button">
+          <div>
+            <button id="salvar">Salvar</button>
+            <button id="cancelar">Cancelar</button>
+          </div>
+          <button id="finalizar" style="display: none">finalizar</button>
+        </div>
+      </div>
+    </dialog>
+    <div class="tasks-list-container">
+      <!-- CONTEINER DE DASHBOARD-->
+      <div class="dashboard-container">
+        <!-- GRAFICOS DO DASHBOARD-->
+        <div class="dashboard-tasks"></div>
+        <!-- CONTEINER DE ITENS DO DASHBOARD-->
+        <div class="dashboard-item">
+          <ul>
+            <li>total de tarefas</li>
+            <li>total de tarefas concluidas</li>
+            <li>total de tarefas pendentes</li>
+          </ul>
+        </div>
+      </div>
+      <!-- CONTEINER DE TAREFAS-->
+      <div class="tasks-container">
+        <!-- CONTEINER PESQUISAR TAREFAS-->
+        <div class="search-task">
+          <input type="text" placeholder="Pesquisar tarefa" />
+          <button>Buscar</button>
+        </div>
+        <!-- CONTEINER LISTAR TAREFAS-->
+        <div class="tasks-list-item">
+          <div class="add-task">
+            <button id="add-task">Nova Tarefa</button>
+          </div>
+          <div class="task-itens">
+            <div class="task-item">
+              <p>Tarefa 01</p>
+              <i><i class="fa-solid fa-trash-can"></i></i>
+            </div>
+            <div class="task-item">
+              <p>Tarefa 02</p>
+              <i><i class="fa-solid fa-trash-can"></i></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/TASK_LIST/js/script.js"></script>
+  </body>
+</html>
