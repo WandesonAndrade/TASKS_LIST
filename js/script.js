@@ -55,11 +55,13 @@ renderTasks();
 //EVENTO DE ADICIONAR TAREFAS
 addTask.addEventListener("click", () => {
   if (addTask.innerHTML === "Salvar") {
+    //adicionar tarefa ao array
     updateTasks();
+    //atualizar a lista
     renderTasks();
   }
 
-  console.log(tasks[2]);
+  //console.log(tasks[2]);
 });
 
 //DELETAR TAREFAS
@@ -69,40 +71,52 @@ tasksList.addEventListener("click", (event) => {
     const taskIndex = Array.from(tasksList.children).indexOf(taskItem);
     tasks.splice(taskIndex, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    //atualizar a lista
     renderTasks();
   }
 });
 
+let task;
 //DETALHES DA TAREFA
 tasksList.addEventListener("click", (event) => {
   if (event.target.tagName === "P") {
     const taskItem = event.target.closest(".task-item");
     const taskIndex = Array.from(tasksList.children).indexOf(taskItem);
-    const task = tasks[taskIndex];
+    task = tasks[taskIndex];
 
     // Exibir detalhes da tarefa
     dialog.showModal();
     taskTitle.value = task.title;
     taskDescription.value = task.description;
-
-    // Editar tarefa
-    addTask.innerHTML = "Alterar";
-
-    addTask.addEventListener("click", () => {
-      tasks[taskIndex].title = taskTitle.value;
-      tasks[taskIndex].description = taskDescription.value;
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      dialog.close();
-      renderTasks();
-    });
-
-    // Marcar tarefa como concluida
-    completedButton.style.display = "block";
-    completedButton.addEventListener("click", () => {
-      tasks[taskIndex].completed = true;
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      dialog.close();
-      renderTasks();
-    });
   }
+});
+
+// Editar tarefa
+addTask.innerHTML = "Alterar";
+
+addTask.addEventListener("click", () => {
+  task.title = taskTitle.value;
+  task.description = taskDescription.value;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  //atualizar a lista
+  renderTasks();
+  //fechar o dialog
+  dialog.close();
+});
+
+// Marcar tarefa como concluida
+completedButton.style.display = "block";
+
+completedButton.addEventListener("click", () => {
+  task.completed = !task.completed;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  //atualizar a lista
+  renderTasks();
+  //fechar o dialog
+  dialog.close();
+
+  console.log(task);
 });
