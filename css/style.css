@@ -196,3 +196,16 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
+
+.tasks-container .tasks-list-item .task-itens .task-item.completed {
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #08b6331c;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin: 10px;
+  justify-content: space-between;
+}
