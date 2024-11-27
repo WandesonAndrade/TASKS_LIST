@@ -100,6 +100,9 @@ tasksList.addEventListener("click", (event) => {
 
     //atualizar a lista
     renderTasks();
+
+    //ATUALIZAR O PROGRESSO
+    updateProgress();
   }
 });
 let task;
