@@ -79,6 +79,7 @@ function renderTasks() {
 renderTasks();
 //EVENTO DE ADICIONAR TAREFAS
 addTask.addEventListener("click", () => {
+  Verificar = 0;
   if (addTask.innerHTML === "Salvar") {
     //adicionar tarefa ao array
     updateTasks();
@@ -108,7 +109,7 @@ tasksList.addEventListener("click", (event) => {
     const taskItem = event.target.closest(".task-item");
     let taskIndex;
     // Verificar se há um termo de busca
-    if (searchTask.value.trim() !== "") {
+    if (searchTask.value.trim() !== "" || Verificar === 1) {
       // Recuperar índice do atributo data-index (usado na busca filtrada)
       taskIndex = parseInt(taskItem.getAttribute("data-index"));
     } else {
@@ -138,6 +139,8 @@ tasksList.addEventListener("click", (event) => {
 
 // EDITAR TAREFAS
 addTask.addEventListener("click", () => {
+  //atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+  Verificar = 0;
   if (addTask.innerHTML === "Alterar") {
     task.title = taskTitle.value;
     task.description = taskDescription.value;
@@ -152,6 +155,9 @@ addTask.addEventListener("click", () => {
 
 // MARCA TAREFAS COMPLETADAS
 completedButton.addEventListener("click", () => {
+  //atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+  Verificar = 0;
+
   task.completed = !task.completed;
   localStorage.setItem("tasks", JSON.stringify(tasks));
 
@@ -227,3 +233,59 @@ const updateProgress = () => {
 
 // Inicializar o progresso ao carregar a página
 updateProgress();
+
+//atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+let Verificar = 0;
+// FILTAR TODAS AS TAREFAS
+totalTask.addEventListener("click", () => {
+  //atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+  Verificar = 0;
+
+  // Recuperar tarefas do LocalStorage
+  renderTasks();
+});
+
+// FILTAR TAREFAS CONCLUIDAS
+completedTask.addEventListener("click", () => {
+  //atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+  Verificar = 1;
+  // Recuperar tarefas do LocalStorage
+  const storedTasks = localStorage.getItem("tasks");
+  const tasks = storedTasks ? JSON.parse(storedTasks) : [];
+
+  // Filtrar as tarefas concluídas
+  const completedTasks = tasks.filter((task) => task.completed);
+
+  // Renderizar as tarefas filtradas com base no índice original
+  tasksList.innerHTML = "";
+  completedTasks.forEach((task) => {
+    const originalIndex = tasks.indexOf(task); // Obter o índice real
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task-item");
+    taskItem.setAttribute("data-index", originalIndex); // Atribuir o índice original como atributo
+
+    updateTaskLayout(taskItem, task);
+    tasksList.appendChild(taskItem);
+  });
+});
+
+// FILTAR TAREFAS PENDENTES
+pendenteTasks.addEventListener("click", () => {
+  //atualiza variavel de verificação de busca tarefas concluidas e não concluidas
+  Verificar = 1;
+
+  // Filtrar as tarefas pendentes
+  const pendingTasks = tasks.filter((task) => !task.completed);
+
+  // Renderizar as tarefas filtradas com base no ID original
+  tasksList.innerHTML = "";
+  pendingTasks.forEach((task) => {
+    const originalIndex = tasks.indexOf(task); // Obter o índice real
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task-item");
+    taskItem.setAttribute("data-index", originalIndex); // Atribuir o índice original como atributo
+
+    updateTaskLayout(taskItem, task);
+    tasksList.appendChild(taskItem);
+  });
+});
