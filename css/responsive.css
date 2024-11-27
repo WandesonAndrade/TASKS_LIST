@@ -1,0 +1,49 @@
+/* Resposta para telas menores (celulares) */
+@media (max-width: 600px) {
+  .tasks-list-container {
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+  }
+
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .dialog .dialog-container .dialog-input input,
+  .dialog .dialog-container .dialog-input textarea {
+    width: 100%;
+  }
+
+  .search-task {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Resposta para tablets (largura entre 601px e 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .tasks-list-container {
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+  }
+
+  .dialog .dialog-container .dialog-input input,
+  .dialog .dialog-container .dialog-input textarea {
+    width: 80%;
+  }
+
+  button {
+    width: 80%;
+  }
+}
+
+/* Resposta para telas grandes (desktop) */
+@media (min-width: 1025px) {
+  .tasks-list-container {
+    grid-template-columns: 1fr 2fr;
+  }
+}
