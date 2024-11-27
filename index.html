@@ -39,14 +39,27 @@
       <!-- CONTEINER DE DASHBOARD-->
       <div class="dashboard-container">
         <!-- GRAFICOS DO DASHBOARD-->
-        <div class="dashboard-tasks"></div>
+        <div class="dashboard-tasks">
+          <div class="task-container">
+            <div id="task-progress" class="progress-circle">
+              <span>0%</span>
+            </div>
+          </div>
+        </div>
         <!-- CONTEINER DE ITENS DO DASHBOARD-->
         <div class="dashboard-item">
-          <ul>
-            <li>total de tarefas</li>
-            <li>total de tarefas concluidas</li>
-            <li>total de tarefas pendentes</li>
-          </ul>
+          <div class="text-item-task">
+            <div><p>Total de tarefas:</p></div>
+            <p id="total-tasks">0</p>
+          </div>
+          <div class="text-item-task">
+            <div><p>Tarefas concluídas:</p></div>
+            <p id="completed-tasks">0</p>
+          </div>
+          <div class="text-item-task">
+            <div><p>Tarefas pendentes:</p></div>
+            <p id="pending-tasks">0</p>
+          </div>
         </div>
       </div>
       <!-- CONTEINER DE TAREFAS-->
@@ -54,7 +67,6 @@
         <!-- CONTEINER PESQUISAR TAREFAS-->
         <div class="search-task">
           <input type="text" placeholder="Pesquisar tarefa" />
-          <button>Buscar</button>
         </div>
         <!-- CONTEINER LISTAR TAREFAS-->
         <div class="tasks-list-item">

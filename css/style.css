@@ -6,13 +6,43 @@
 }
 
 body {
-  background-color: #e2eaf5;
+  width: 100%;
+  height: 100%;
+  --color: rgba(31, 0, 115, 0.3);
+  background-color: #25243a;
+  background-image: linear-gradient(
+      180deg,
+      transparent 24%,
+      var(--color) 25%,
+      var(--color) 26%,
+      transparent 27%,
+      transparent 74%,
+      var(--color) 75%,
+      var(--color) 76%,
+      transparent 77%,
+      transparent
+    ),
+    linear-gradient(
+      45deg,
+      transparent 24%,
+      var(--color) 35%,
+      var(--color) 26%,
+      transparent 17%,
+      transparent 74%,
+      var(--color) 75%,
+      var(--color) 76%,
+      transparent 77%,
+      transparent
+    );
+  background-size: 55px 55px;
 }
 
 .task-title {
-  border: 1px solid #2a394f;
-  border-radius: 10px;
-  padding: 10px;
+  width: 100%;
+  border-radius: 30px;
+  color: #fff;
+  border: 0.05px solid #c5cacf;
+  padding: 30px;
   margin: 10px;
 }
 
@@ -30,37 +60,41 @@ body {
 
 .dashboard-container {
   border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #c9c5c5, -15px -15px 30px #dbd9d9;
   border: 0.05px solid #c5cacf;
   padding: 30px;
 }
 
-.dashboard-container .dashboard-item > ul > li {
-  cursor: pointer;
+.dashboard-container .dashboard-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  flex-direction: column;
+}
+
+.dashboard-container .dashboard-item .text-item-task {
   font-weight: 700;
-  transition: all 0.2s;
   padding: 10px 20px;
   border-radius: 10px;
-  background: #8889cf1c;
+  background: #e3e3e95d;
   border: 1px solid transparent;
   display: flex;
   align-items: center;
   font-size: 15px;
   margin: 10px;
+  justify-content: space-between;
 }
 .tasks-container {
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
 }
 
 .search-task {
   width: 100%;
   display: flex;
   border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #c9c5c5, -15px -15px 30px #dbd9d9;
+
   border: 0.05px solid #c5cacf;
   padding: 15px;
   margin: 10px;
@@ -86,7 +120,7 @@ button:hover {
 
 .search-task input {
   border-radius: 10px;
-  outline: 2px solid #000;
+
   border: 0;
   width: 100%;
   background-color: #e2e2e2;
@@ -99,13 +133,14 @@ button:hover {
 .search-task input:focus {
   outline-offset: 5px;
   background-color: #fff;
+  outline: 2px solid #12971d;
 }
 
 .tasks-container .tasks-list-item .task-itens .task-item {
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 10px;
-  background: #8889cf1c;
+  background: #e3e3e95d;
   border: 1px solid transparent;
   display: flex;
   align-items: center;
@@ -124,16 +159,13 @@ button:hover {
 .tasks-list-item {
   width: 100%;
   border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #c9c5c5, -15px -15px 30px #dbd9d9;
   border: 0.05px solid #c5cacf;
   padding: 30px;
 }
 
 .dialog {
   border-radius: 30px;
-  background: #e0e0e0;
-  box-shadow: 15px 15px 30px #c9c5c5, -15px -15px 30px #dbd9d9;
+  background: #1b1735bb;
   border: 0.05px solid #c5cacf;
   padding: 30px;
   margin-top: 5%;
@@ -177,6 +209,7 @@ button:hover {
   transition: all 0.5s;
   margin: 10px;
   outline: none;
+  padding: 10px;
 }
 
 .dialog .dialog-container .dialog-input textarea:focus {
@@ -190,6 +223,7 @@ button:hover {
   font-size: 25px;
   font-weight: 700;
   text-align: center;
+  color: #ffffff;
 }
 
 .dialog-button {
@@ -201,11 +235,25 @@ button:hover {
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 10px;
-  background: #08b6331c;
+  background: #08b6344f;
   border: 1px solid transparent;
   display: flex;
   align-items: center;
   font-size: 15px;
   margin: 10px;
   justify-content: space-between;
+}
+
+.progress-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(#ccc 0%, #ccc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px auto;
 }

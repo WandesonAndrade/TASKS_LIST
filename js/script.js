@@ -7,7 +7,18 @@ const titleDialog = document.querySelector(".dialog-title h3");
 
 //ABRIR E FECHAR O DIALOG
 newTaskButton[0].addEventListener("click", () => {
+  task = null;
+  taskTitle.value = "";
+  taskDescription.value = "";
   dialog.showModal();
+
+  // Alterar o texto do botão
+  addTask.innerHTML = "Salvar";
+  // Ocultar o botão de conclusão
+  completedButton.style.display = "none";
+  titleDialog.innerHTML = "Nova tarefa";
+
+  console.log(`"task: " ${task}`);
 });
 //FECHAR O DIALOG
 closeDialog.addEventListener("click", () => {
@@ -73,6 +84,8 @@ addTask.addEventListener("click", () => {
     updateTasks();
     //atualizar a lista
     renderTasks();
+    //ATUALIZAR O PROGRESSO
+    updateProgress();
   }
 });
 
@@ -88,7 +101,6 @@ tasksList.addEventListener("click", (event) => {
     renderTasks();
   }
 });
-
 let task;
 //DETALHES DA TAREFA
 tasksList.addEventListener("click", (event) => {
@@ -126,14 +138,16 @@ tasksList.addEventListener("click", (event) => {
 
 // EDITAR TAREFAS
 addTask.addEventListener("click", () => {
-  task.title = taskTitle.value;
-  task.description = taskDescription.value;
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  if (addTask.innerHTML === "Alterar") {
+    task.title = taskTitle.value;
+    task.description = taskDescription.value;
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  //atualizar a lista
-  renderTasks();
-  //fechar o dialog
-  dialog.close();
+    //atualizar a lista
+    renderTasks();
+    //fechar o dialog
+    dialog.close();
+  }
 });
 
 // MARCA TAREFAS COMPLETADAS
@@ -145,9 +159,10 @@ completedButton.addEventListener("click", () => {
   renderTasks();
   //fechar o dialog
   dialog.close();
+  //ATUALIZAR O PROGRESSO
+  updateProgress();
 });
 
-//==> teste de codigo
 //BUSCAR TAREFAS
 const searchTask = document.querySelector(".search-task input");
 
@@ -175,3 +190,40 @@ searchTask.addEventListener("input", () => {
     tasksList.appendChild(taskItem);
   });
 });
+
+// Configuração dos círculos de progresso
+const taskProgress = document.getElementById("task-progress");
+const taskSummary = document.getElementById("task-summary");
+const totalTask = document.querySelector("#total-tasks");
+const completedTask = document.querySelector("#completed-tasks");
+const pendenteTasks = document.querySelector("#pending-tasks");
+
+// Atualiza o círculo de progresso e o resumo
+const updateProgress = () => {
+  // Recuperar tarefas do LocalStorage
+  const storedTasks = localStorage.getItem("tasks");
+  const tasks = storedTasks ? JSON.parse(storedTasks) : [];
+
+  // Calcular total e concluídas
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
+
+  // Calcular a porcentagem
+  const percentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+  // Atualizar o estilo do círculo
+  taskProgress.style.background = `conic-gradient(#4caf50 ${percentage}%, #ccc ${percentage}%)`;
+  taskProgress.querySelector("span").textContent = `${Math.round(percentage)}%`;
+
+  // Atualizar o total de tarefas
+  totalTask.innerHTML = totalTasks;
+
+  // Atualizar o total de tarefas concluídas
+  completedTask.innerHTML = completedTasks;
+
+  // Atualizar o total de tarefas pendentes
+  pendenteTasks.innerHTML = totalTasks - completedTasks;
+};
+
+// Inicializar o progresso ao carregar a página
+updateProgress();
