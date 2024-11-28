@@ -93,7 +93,6 @@ body {
   width: 100%;
   display: flex;
   border-radius: 30px;
-
   border: 0.05px solid #c5cacf;
   padding: 15px;
   margin: 10px;
@@ -273,4 +272,11 @@ button:hover {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+#total-tasks,
+#completed-tasks,
+#pending-tasks {
+  cursor: pointer;
+  text-decoration: underline;
 }
